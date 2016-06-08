@@ -2,6 +2,10 @@
 
 Extension Version: 0.3v
 
+## Install
+
+composer require "alexcold/yii2-plentyconnector":"dev-master"
+
 ## Configuration
 
 Add to you modules config file these lines :
