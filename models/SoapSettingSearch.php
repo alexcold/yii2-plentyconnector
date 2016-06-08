@@ -5,7 +5,7 @@ namespace app\modules\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use alexcold\plentyconnector\SoapSetting;
+use alexcold\plentyconnector\models\SoapSetting;
 
 /**
  * SoapSettingSearch represents the model behind the search form about `app\models\SoapSetting`.
