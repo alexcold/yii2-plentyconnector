@@ -1,0 +1,35 @@
+{
+    "name": "alexcold/yii2-plentyconnector",
+    "description": "PlentyMarkets SOAP API connector",
+    "keywords": ["yii2", "yii2-plentyconnector", "plenty markets soap api management", "alexcold"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/alexcold/yii2-plentyconnector/issues",
+        "source": "https://github.com/alexcold/yii2-plentyconnector"
+    },
+    "authors": [
+        {
+            "name": "Aleksandr Cerkasov",
+            "email": "coldworld333@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "~2.0",
+        "yiisoft/yii2-bootstrap": "~2.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "alexcold\\plentyconnector\\": ""
+        }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
