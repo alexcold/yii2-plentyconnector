@@ -1,5 +1,5 @@
 <?php
-namespace app\components;
+namespace alexcold\plentyconnector\components;
 
 use Yii;
 use yii\base\Component;

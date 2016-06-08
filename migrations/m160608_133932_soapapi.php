@@ -1,5 +1,5 @@
 <?php
-
+use yii\db\Schema;
 use yii\db\Migration;
 
 class m160608_133932_soapapi extends Migration
@@ -15,7 +15,7 @@ class m160608_133932_soapapi extends Migration
             'password' => Schema::TYPE_STRING . '(32)',
             'user_id' => Schema::TYPE_INTEGER,
         ]);
-        $this->createTable('{{%soap_setting}}', [
+        $this->createTable('{{%app_value}}', [
             'ID' => Schema::TYPE_PK,
             'key' => Schema::TYPE_STRING . '(255) NOT NULL',
             'value' => Schema::TYPE_STRING . '(255) NOT NULL',

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\models;
+namespace alexcold\plentyconnector\models;
 
 use Yii;
 use yii\base\Model;
