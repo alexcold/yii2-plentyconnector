@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'enabled',
             'username',
             'password',
-            'user_id',
         ],
     ]) ?>
 

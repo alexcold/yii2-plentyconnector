@@ -91,6 +91,7 @@ class SoapSetting extends \yii\db\ActiveRecord {
                return true;
             }
         } catch (\Exception $e) {
+            $this->delete();
             Yii::$app->session->setFlash('info', Yii::t('app', 'Conneciton data is invalid'));
             return false;
         }
