@@ -35,10 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'username',
-            // 'password',
-            // 'user_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}{view}{update}{reset}',
+                'buttons' => [
+                    'reset' => function ($k, $m) {
+                        return Html::a('', ['reset-connection-data', 'id' => $m->ID], ['class' => 'glyphicon glyphicon-refresh', 'data-method' => 'post']);
+                    } 
+                ]
+            ],
         ],
     ]); ?>
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * 
+ * Plenty Markets SOAP API connector - component 
+ * @author Aleksandr Cerkasov <coldworld333@gmnail.com>
+ * 
+ */
 namespace alexcold\plentyconnector\components;
 
 use Yii;
@@ -7,22 +13,19 @@ use yii\base\InvalidConfigException;
 use alexcold\plentyconnector\models\SoapSetting;
 use alexcold\plentyconnector\models\AppValue;
 
-class SOAP extends Component
-{
-	public $getInstance = null;
-	public $ID = null;
+class SOAP extends Component {
+	private $instance;
+	public $ID;
 	
-	public function __construct()
-	{
-		$this->getInstance = $this->_getInstance();
+	public function __construct ($id) {
+		$this->ID = $id;
 	}
-	private function getSoapClient($version = null, $rcon = null)
-	{
+	
+	private function getSoapClient () {
 		ini_set('max_execution_time', 3600);
-		
 		date_default_timezone_set("CET");
 		
-		$settings = SoapSetting::getDefaultSetting($rcon);
+		$settings = SoapSetting::getDefaultSetting($this->ID);
 		$this->ID = $settings->ID;
 		
 		if($version)
@@ -30,10 +33,10 @@ class SOAP extends Component
 		
 		$soapClient = new \SoapClient($settings->connection_uri."version".$settings->version."/?xml", array('trace' => 1));
 		
-		$soapHeader = AppValue::Get("soap_import_header_".$settings->ID, "UNSET");
-		$lastToken = AppValue::GetInt("soap_import_last_token_".$settings->ID, 0);
+		$soapHeader = $settings->soap_header;
+		$lastToken = $settings->last_token;
 			
-		if($soapHeader == "UNSET" || date("z", $lastToken) != date("z", time()))
+		if(!$soapHeader || date("z", $lastToken) != date("z", time()))
 		{
 		    $authentification = $soapClient->GetAuthentificationToken( array('Username' => $settings->username, 'Userpass' => $settings->password));
 		    if(isset($authentification->Token))
@@ -45,25 +48,25 @@ class SOAP extends Component
 
 				$serializedHeader = serialize($headerbody);
 				
-				AppValue::Set("soap_import_header_".$settings->ID, $serializedHeader);
-				AppValue::Set("soap_import_last_token_".$settings->ID, time());
+				$settings->soap_header = $serializedHeader;
+				$settings->last_token = time();
+				$settings->save();
 			}
 		}
 
-		$soapHeader = AppValue::Get("soap_import_header_".$settings->ID, "UNSET");
+		$soapHeader = $settings->soap_header;
 		$headerbody = unserialize($soapHeader);
 
 		$header = new \SOAPHeader('Authentification', 'verifyingToken', $headerbody, false); 
-		$soapClient->__setSoapHeaders($header);
-
-		return $soapClient;
+		$this->instance = $soapClient->__setSoapHeaders($header);
 	}
-	public function _getInstance()
-	{
-		return $this->getSoapClient();
+	
+	public function init () {
+		parent::init();
+		$this->getSoapClient();
 	}
-	public function reconnect($rcon)
-	{
-		$this->getInstance = $this->getSoapClient(null, $rcon);
+	
+	public function getInstance () {
+		return $this->instance;
 	}
 }

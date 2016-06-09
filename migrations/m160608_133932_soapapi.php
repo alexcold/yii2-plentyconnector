@@ -8,17 +8,13 @@ class m160608_133932_soapapi extends Migration
     {
         $this->createTable('{{%soap_setting}}', [
             'ID' => Schema::TYPE_PK,
-            'connection_uri' => Schema::TYPE_STRING . '(25) NOT NULL',
-            'version' => Schema::TYPE_STRING . '(255) NOT NULL',
-            'enabled' => Schema::TYPE_STRING . '(60) NOT NULL',
-            'username' => Schema::TYPE_STRING . '(32) NOT NULL',
-            'password' => Schema::TYPE_STRING . '(32)',
-            'user_id' => Schema::TYPE_INTEGER,
-        ]);
-        $this->createTable('{{%app_value}}', [
-            'ID' => Schema::TYPE_PK,
-            'key' => Schema::TYPE_STRING . '(255) NOT NULL',
-            'value' => Schema::TYPE_STRING . '(255) NOT NULL',
+            'connection_uri' => Schema::TYPE_STRING . '(255) NOT NULL',
+            'version' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'enabled' => Schema::TYPE_INTEGER . '(1) NOT NULL',
+            'username' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'password' => Schema::TYPE_STRING . '(64)',
+            'soap_header' => Schema::TYPE_STRING . '(255)',
+            'last_token' => Schema::TYPE_INTEGER . '(11)',
         ]);
     }
 }

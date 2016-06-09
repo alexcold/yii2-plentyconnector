@@ -10,13 +10,12 @@ use alexcold\plentyconnector\models\SoapSetting;
 /**
  * SoapSettingSearch represents the model behind the search form about `app\models\SoapSetting`.
  */
-class SoapSettingSearch extends SoapSetting
-{
+class SoapSettingSearch extends SoapSetting {
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+     
+    public function rules () {
         return [
             [['ID', 'version', 'enabled'], 'integer'],
             [['connection_uri', 'username', 'password'], 'safe'],
@@ -26,9 +25,8 @@ class SoapSettingSearch extends SoapSetting
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
+     
+    public function scenarios () {
         return Model::scenarios();
     }
 
@@ -39,8 +37,8 @@ class SoapSettingSearch extends SoapSetting
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+     
+    public function search ($params) {
         $query = SoapSetting::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -50,8 +48,6 @@ class SoapSettingSearch extends SoapSetting
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
@@ -62,8 +58,7 @@ class SoapSettingSearch extends SoapSetting
         ]);
 
         $query->andFilterWhere(['like', 'connection_uri', $this->connection_uri])
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password]);
+        ->andFilterWhere(['like', 'username', $this->username]);
 
         return $dataProvider;
     }
