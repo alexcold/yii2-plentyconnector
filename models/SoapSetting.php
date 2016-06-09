@@ -85,7 +85,7 @@ class SoapSetting extends \yii\db\ActiveRecord {
     public function testPlentyCall () {
         try {
             $soapClient = new \alexcold\plentyconnector\components\SOAP($this->ID);
-            if ($soapClient->getInstance()) {
+            if ($soapClient->getInstance()->SearchOrders(['OrderID' => -1])) {
                 Yii::$app->session->setFlash('info', Yii::t('app', 'Successfully connected to ') . $this->connection_uri);
                return true;
             }
