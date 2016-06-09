@@ -51,7 +51,6 @@ class SoapSetting extends \yii\db\ActiveRecord {
             'enabled' => Yii::t('app', 'Enabled'),
             'username' => Yii::t('app', 'Username'),
             'password' => Yii::t('app', 'Password'),
-            'user_id' => Yii::t('app', 'User ID'),
             'soap_header' => Yii::t('app', 'Soap Header'),
             'last_token' => Yii::t('app', 'Last Token')
         ];
