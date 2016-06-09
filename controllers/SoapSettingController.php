@@ -80,6 +80,8 @@ class SoapSettingController extends Controller {
             
             if ($model->save() && $model->testPlentyCall()) {
                 return $this->redirect(['view', 'id' => $model->ID]);
+            } else {
+                return $this->redirect(['view', 'id' => $model->ID]);
             }
         } else {
             return $this->render('create', [
