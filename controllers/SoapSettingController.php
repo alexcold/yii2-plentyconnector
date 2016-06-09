@@ -122,7 +122,7 @@ class SoapSettingController extends Controller {
      */
     
     public function actionResetConnectionData ($id) {
-        if (Yii::$app->request->isPost() && $this->findModel($id)->resetSoapHeader()) {
+        if ($this->findModel($id)->resetSoapHeader()) {
             Yii::$app->session->setFlash('info', Yii::t('app', 'Connection Data Was Reseted'));
         } else {
             Yii::$app->session->setFlash('warning', Yii::t('app', 'Something went wrong, try rewriting the connection'));
